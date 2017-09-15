@@ -192,8 +192,13 @@ void driveCommandHandler(const geometry_msgs::Twist::ConstPtr& message) {
 
   int leftInt = left;
   int rightInt = right;
+
+  if (leftInt == 0 && rightInt == 0) {
+      sprintf(moveCmd, "s\n");
+  } else {
     
   sprintf(moveCmd, "v,%d,%d\n", leftInt, rightInt); //format data for arduino into c string
+  }
   usb.sendData(moveCmd);                      //send movement command to arduino over usb
   memset(&moveCmd, '\0', sizeof (moveCmd));   //clear the movement command string
 }
