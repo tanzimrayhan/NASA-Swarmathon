@@ -751,7 +751,7 @@
 			<offset>0.0 0.0 0.0</offset>
 			<drift>0.1 0.1 0</drift>
 			<driftFrequency>0.0 0.0 0.0</driftFrequency>
-			<gaussianNoise>0 0 0.0</gaussianNoise>
+			<gaussianNoise>0.0 0.0 0.0</gaussianNoise>
 		</plugin>
 
 		<!-- IMU plugin -->
