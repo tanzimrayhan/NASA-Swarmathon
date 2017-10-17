@@ -14,7 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  CATKIN_DEPENDS geometry_msgs roscpp sensor_msgs std_msgs random_numbers tf apriltags_ros
+  CATKIN_DEPENDS geometry_msgs swarmie_msgs roscpp sensor_msgs std_msgs random_numbers tf apriltags_ros
 )
 
 include_directories(
@@ -23,6 +23,7 @@ include_directories(
 
 add_executable(
   behaviours
+  src/Tag.cpp
   src/ObstacleController.cpp 
   src/PickUpController.cpp
   src/DropOffController.cpp
@@ -32,6 +33,7 @@ add_executable(
   src/DriveController.cpp
   src/RangeController.cpp
   src/LogicController.cpp
+  src/ManualWaypointController.cpp
 )
 
 add_dependencies(behaviours ${catkin_EXPORTED_TARGETS})
