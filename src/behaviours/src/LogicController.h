@@ -13,7 +13,6 @@
 #include <queue>
 
 using namespace std;
-
 struct PrioritizedController {
   int priority = -1;
   Controller* controller = nullptr;
