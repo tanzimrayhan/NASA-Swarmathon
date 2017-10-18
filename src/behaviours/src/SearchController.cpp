@@ -1,6 +1,7 @@
 #include "SearchController.h"
 #include <angles/angles.h>
 
+int curveProgress = 1;
 SearchController::SearchController() {
   rng = new random_numbers::RandomNumberGenerator();
   currentLocation.x = 0;
@@ -26,7 +27,7 @@ void SearchController::Reset() {
 Result SearchController::DoWork() {
 
   if (!result.wpts.waypoints.empty()) {
-    if (hypot(result.wpts.waypoints[0].x-currentLocation.x, result.wpts.waypoints[0].y-currentLocation.y) < 0.10) {
+    if (hypot(result.wpts.waypoints[0].x-currentLocation.x, result.wpts.waypoints[0].y-currentLocation.y) < 0.50) {
       attemptCount = 0;
     }
   }
@@ -57,10 +58,12 @@ Result SearchController::DoWork() {
     }
     else
     {
+      
       //select new heading from Gaussian distribution around current heading
-      searchLocation.theta = rng->gaussian(currentLocation.theta, 0.785398); //45 degrees in radians
-      searchLocation.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
-      searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+      searchLocation.theta =   centerLocation.theta + (.10 * curveProgress); //45 degrees in radians
+      searchLocation.x = centerLocation.x + ((1+ .2 * searchLocation.theta) * cos(searchLocation.theta));
+      searchLocation.y = centerLocation.y + ((1+ .2 * searchLocation.theta) * sin(searchLocation.theta));
+      curveProgress++;
     }
 
     result.wpts.waypoints.clear();
