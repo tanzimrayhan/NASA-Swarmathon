@@ -32,6 +32,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   ublox_msgs
   ublox_serialization
+  swarmie_msgs
 )
 
 find_package( Qt5 REQUIRED COMPONENTS Widgets Xml )
@@ -46,6 +47,7 @@ catkin_package( CATKIN_DEPENDS
   cv_bridge
   image_transport
   geometry_msgs
+  swarmie_msgs
 )
 
 SET(rover_gui_plugin_RESOURCES resources/resources.qrc)
