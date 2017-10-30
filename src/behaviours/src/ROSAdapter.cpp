@@ -309,6 +309,9 @@ void behaviourStateMachine(const ros::TimerEvent&) {
     bool wait = false;
     
     //if a wait behaviour is thrown sit and do nothing untill logicController is ready
+    if (result.type == waypoint){
+      ROS_INFO("waypoints bro");
+    }
     if (result.type == behavior) {
       if (result.b == wait) {
         wait = true;
