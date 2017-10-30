@@ -86,6 +86,8 @@ geometry_msgs::Pose2D currentLocation;
 geometry_msgs::Pose2D currentLocationMap;
 geometry_msgs::Pose2D currentLocationAverage;
 
+geometry_msgs::Pose2D where_ive_been;
+
 geometry_msgs::Pose2D centerLocation;
 geometry_msgs::Pose2D centerLocationMap;
 geometry_msgs::Pose2D centerLocationOdom;
@@ -130,6 +132,7 @@ ros::Publisher infoLogPublisher;
 ros::Publisher driveControlPublish;
 ros::Publisher heartbeatPublisher;
 ros::Publisher waypointFeedbackPublisher;
+ros::Publisher where_ive_been_publisher;
 
 // Subscribers
 ros::Subscriber joySubscriber;
@@ -215,6 +218,7 @@ int main(int argc, char **argv) {
   driveControlPublish = mNH.advertise<geometry_msgs::Twist>((publishedName + "/driveControl"), 10);
   heartbeatPublisher = mNH.advertise<std_msgs::String>((publishedName + "/behaviour/heartbeat"), 1, true);
   waypointFeedbackPublisher = mNH.advertise<swarmie_msgs::Waypoint>((publishedName + "/waypoints"), 1, true);
+  where_ive_been_publisher = mNH.advertise<geometry_msgs::Pose2D>((publishedName + "/where_ive_been"), 100);
 
   publish_status_timer = mNH.createTimer(ros::Duration(status_publish_interval), publishStatusTimerEventHandler);
   stateMachineTimer = mNH.createTimer(ros::Duration(behaviourLoopTimeStep), behaviourStateMachine);
@@ -314,7 +318,10 @@ void behaviourStateMachine(const ros::TimerEvent&) {
         wait = true;
       }
     }
-    
+    where_ive_been.x = currentLocation.x;
+    where_ive_been.y = currentLocation.y;
+    where_ive_been.theta = currentLocation.theta;
+    where_ive_been_publisher.publish(where_ive_been);
     //do this when wait behaviour happens
     if (wait) {
       sendDriveCommand(0.0,0.0);
