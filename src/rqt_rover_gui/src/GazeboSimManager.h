@@ -35,7 +35,7 @@ public:
 
     QString addGroundPlane( QString ground_name );
     QString removeGroundPlane( QString ground_name );
-    QString addRover(QString rover_name, float x, float y, float z);
+    QString addRover(QString rover_name, float x, float y, float z, float R, float P, float Y);
     QString removeRover(QString rover_name);
     QString startRoverNode(QString rover_name);
     QString stopRoverNode(QString rover_name);
@@ -58,6 +58,7 @@ public:
 
 private:
     QString app_root; // Path to the application root directory
+    QString log_root;
     QProcess* gazebo_server_process;
     QProcess* gazebo_client_process;
     QProcess* command_process;
@@ -68,6 +69,7 @@ private:
     set< tuple<float, float, float> > model_locations;
 
     QString custom_world_path;
+    
 };
 
 #endif // GazeboSimManager_H
