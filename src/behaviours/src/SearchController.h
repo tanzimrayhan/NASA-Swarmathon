@@ -20,7 +20,7 @@ public:
   Result DoWork() override;
   bool ShouldInterrupt() override;
   bool HasWork() override;
-
+  Point CurrentSearchLocation();
   // sets the value of the current location
   //void UpdateData(geometry_msgs::Pose2D currentLocation, geometry_msgs::Pose2D centerLocation);
   void SetCurrentLocation(Point currentLocation);

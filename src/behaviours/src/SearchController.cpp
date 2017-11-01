@@ -64,6 +64,7 @@ Result SearchController::DoWork() {
       searchLocation.x = centerLocation.x + ((1+ .2 * searchLocation.theta) * cos(searchLocation.theta));
       searchLocation.y = centerLocation.y + ((1+ .2 * searchLocation.theta) * sin(searchLocation.theta));
       curveProgress++;
+      SearchController::CurrentSearchLocation();
     }
 
     result.wpts.waypoints.clear();
@@ -109,4 +110,8 @@ void SearchController::SetSuccesfullPickup() {
   succesfullPickup = true;
 }
 
+Point SearchController::CurrentSearchLocation() {
+  this->searchLocation = searchLocation;
+  return this->searchLocation;
+}
 
