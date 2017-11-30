@@ -389,4 +389,6 @@ void LogicController::SetModeManual()
 Point LogicController::Searched() {
   return searchController.CurrentSearchLocation();
 }
-
+bool LogicController::NewSearchedLocation(){
+  return searchController.HasNewSearchedLocation();
+}

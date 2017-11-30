@@ -50,6 +50,7 @@ public:
   std::vector<int> GetClearedWaypoints();
 
   Point Searched();
+  bool NewSearchedLocation();
   void SetModeManual();
   void SetModeAuto();
 
