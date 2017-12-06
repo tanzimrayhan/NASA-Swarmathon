@@ -61,8 +61,8 @@ Result SearchController::DoWork() {
       
       //select new heading from Gaussian distribution around current heading
       searchLocation.theta =   centerLocation.theta + (.10 * curveProgress); //45 degrees in radians
-      searchLocation.x = centerLocation.x + ((1+ .2 * searchLocation.theta) * cos(searchLocation.theta));
-      searchLocation.y = centerLocation.y + ((1+ .2 * searchLocation.theta) * sin(searchLocation.theta));
+      searchLocation.x = centerLocation.x + ((2+ .2 * searchLocation.theta) * cos(searchLocation.theta));
+      searchLocation.y = centerLocation.y + ((2+ .2 * searchLocation.theta) * sin(searchLocation.theta));
       curveProgress++;
       SearchController::CurrentSearchLocation();
     }
