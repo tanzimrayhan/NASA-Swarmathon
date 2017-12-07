@@ -111,7 +111,7 @@ long int startTime = 0;
 float minutesTime = 0;
 float hoursTime = 0;
 
-float drift_tolerance = 1.2; // meters
+float drift_tolerance = 0.5; // meters
 
 Result result;
 
@@ -136,7 +136,7 @@ ros::Publisher where_ive_been_publisher;
 
 // Subscribers
 ros::Subscriber joySubscriber;
-ros::Subscriber modeSubscriber;
+ros::Subscriber modeSubscriber; 
 ros::Subscriber targetSubscriber;
 ros::Subscriber odometrySubscriber;
 ros::Subscriber mapSubscriber;
@@ -153,7 +153,7 @@ time_t timerStartTime;
 
 // An initial delay to allow the rover to gather enough position data to 
 // average its location.
-unsigned int startDelayInSeconds = 15;
+unsigned int startDelayInSeconds = 30;
 float timerTimeElapsed = 0;
 
 //Transforms
@@ -667,7 +667,8 @@ void transformMapCentertoOdom()
   geometry_msgs::PoseStamped odomPose;
   string x = "";
   
-  try { //attempt to get the transform of the center point in map frame to odom frame.
+  try
+  { //attempt to get the transform of the center point in map frame to odom frame.
     tfListener->waitForTransform(publishedName + "/map", publishedName + "/odom", ros::Time::now(), ros::Duration(1.0));
     tfListener->transformPose(publishedName + "/odom", mapPose, odomPose);
   }
