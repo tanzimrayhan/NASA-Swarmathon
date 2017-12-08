@@ -1,6 +1,7 @@
 #include "SearchController.h"
 #include <angles/angles.h>
-
+int squareSize=3;
+int curveProgress = 1;
 SearchController::SearchController() {
   rng = new random_numbers::RandomNumberGenerator();
   currentLocation.x = 0;
@@ -26,7 +27,7 @@ void SearchController::Reset() {
 Result SearchController::DoWork() {
 
   if (!result.wpts.waypoints.empty()) {
-    if (hypot(result.wpts.waypoints[0].x-currentLocation.x, result.wpts.waypoints[0].y-currentLocation.y) < 0.15) {
+    if (hypot(result.wpts.waypoints[0].x-currentLocation.x, result.wpts.waypoints[0].y-currentLocation.y) < 0.50) {
       attemptCount = 0;
     }
   }
@@ -57,10 +58,30 @@ Result SearchController::DoWork() {
     }
     else
     {
-      //select new heading from Gaussian distribution around current heading
-      searchLocation.theta = rng->gaussian(currentLocation.theta, 0.785398); //45 degrees in radians
-      searchLocation.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
-      searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+      if (curveProgress > 4) curveProgress=1;
+      switch(curveProgress){
+	case 1: 
+	  searchLocation.theta =   centerLocation.theta + (.10 * curveProgress); //45 degrees in radians
+	  searchLocation.x = squareSize; 
+	  searchLocation.y = squareSize;
+	  break;
+	case 2: 
+	  searchLocation.theta =   centerLocation.theta + (.10 * curveProgress); //45 degrees in radians
+	  searchLocation.x = -squareSize; 
+	  searchLocation.y =  squareSize;
+	  break;
+	case 3: 
+	  searchLocation.theta =   centerLocation.theta + (.10 * curveProgress); //45 degrees in radians
+	  searchLocation.x = -squareSize; 
+	  searchLocation.y = -squareSize;
+	  break;
+	case 4: 
+	  searchLocation.theta =   centerLocation.theta + (.10 * curveProgress); //45 degrees in radians
+	  searchLocation.x = squareSize; 
+	  searchLocation.y = -squareSize;
+	  break;
+      }
+	  curveProgress++;
     }
 
     result.wpts.waypoints.clear();
