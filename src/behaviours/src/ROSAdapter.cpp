@@ -79,8 +79,9 @@ void resultHandler();
 
 Point updateCenterLocation();
 void transformMapCentertoOdom();
-
-
+geometry_msgs::Pose2D Searched;
+//void SearchedLocations(Point&) ;
+ // Searched = logicController.Searched();
 // Numeric Variables for rover positioning
 geometry_msgs::Pose2D currentLocation;
 geometry_msgs::Pose2D currentLocationMap;
@@ -334,10 +335,13 @@ void behaviourStateMachine(const ros::TimerEvent&)
         wait = true;
       }
     }
-    where_ive_been.x = currentLocation.x;
-    where_ive_been.y = currentLocation.y;
-    where_ive_been.theta = currentLocation.theta;
-    where_ive_been_publisher.publish(where_ive_been);
+ /*   if (NewSearchedLocation()) {
+      SearchedLocations(Searched);
+    }
+    where_ive_been.x = Searched.x;
+    where_ive_been.y = Searched.y;
+    where_ive_been.theta = Searched.theta;
+    where_ive_been_publisher.publish(where_ive_been);*/
     //do this when wait behaviour happens
     if (wait)
     {
@@ -618,7 +622,6 @@ void publishStatusTimerEventHandler(const ros::TimerEvent&) {
   msg.data = "York College. GO CARDINALS!";
   status_publisher.publish(msg);
 }
-
 void manualWaypointHandler(const swarmie_msgs::Waypoint& message) {
   Point wp;
   wp.x = message.x;
@@ -744,4 +747,10 @@ void humanTime() {
   }
   
   //cout << "System has been Running for :: " << hoursTime << " : hours " << minutesTime << " : minutes " << timeDiff << "." << frac << " : seconds" << endl; //you can remove or comment this out it just gives indication something is happening to the log file
+}
+bool NewSearchedLocation(){
+  return logicController.NewSearchedLocation();
+}
+void SearchedLocations(geometry_msgs::Pose2D& Searched){
+//  Searched = logicController.Searched();
 }

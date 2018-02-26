@@ -388,3 +388,9 @@ void LogicController::SetModeManual()
     driveController.Reset();
   }
 }
+Point LogicController::Searched() {
+  return searchController.CurrentSearchLocation();
+}
+bool LogicController::NewSearchedLocation(){
+  return searchController.HasNewSearchedLocation();
+}

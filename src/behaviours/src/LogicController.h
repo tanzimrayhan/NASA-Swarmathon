@@ -61,6 +61,8 @@ public:
   // been visited. 
   std::vector<int> GetClearedWaypoints();
 
+  Point Searched();
+  bool NewSearchedLocation();
   
   // Put the logic controller into manual mode. Changes process state
   // to PROCESS_STATE_MANUAL and logic state to LOGIC_STATE_INTERRUPT.
