@@ -754,8 +754,3 @@ bool NewSearchedLocation(){
 void SearchedLocations(geometry_msgs::Pose2D& Searched){
 //  Searched = logicController.Searched();
 }
-using namespace geometry_msgs;
-Pose2D<Point>::Pose2D(Point point){
-  x=point.x;}
-
-
