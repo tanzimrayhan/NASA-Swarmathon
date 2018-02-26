@@ -114,4 +114,7 @@ Point SearchController::CurrentSearchLocation() {
   this->searchLocation = searchLocation;
   return this->searchLocation;
 }
-
+bool SearchContoller::HasNewSearchedLocation(){
+ //TODO: Check to see if its current search location has been searched before
+  return true;
+}
